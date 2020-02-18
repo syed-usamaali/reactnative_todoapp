@@ -14,7 +14,11 @@ class Login extends Component {
           source={require('../images/todo.png')}
         />
         <TextBox inputText={'Name'} value={this.state.text} />
-        <ButtonComponent buttonTitle={'Login'} />
+        <ButtonComponent
+          onPress={() => this.props.navigation.navigate('Profile')}>
+          Login
+        </ButtonComponent>
+        />
       </View>
     );
   }
@@ -29,6 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    backgroundColor: '#ffffff',
   },
 });
 
