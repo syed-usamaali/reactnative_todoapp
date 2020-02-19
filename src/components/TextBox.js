@@ -2,7 +2,13 @@ import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
 const TextBox = props => {
-  return <TextInput style={styles.inputStyle} placeholder={props.inputText} />;
+  return (
+    <TextInput
+      style={styles.inputStyle}
+      placeholder={props.inputText}
+      onChangeText={props.onChangeText}
+    />
+  );
 };
 
 const styles = StyleSheet.create({

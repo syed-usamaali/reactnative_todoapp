@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import {View, Button, Text} from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, AsyncStorage} from 'react-native';
 import Header from '../components/Header';
 
 class Profile extends Component {
+  componentWillMount() {
+    const value = AsyncStorage.getItem('name');
+    console.log(value);
+  }
+
   render() {
     return (
       <View>
-        <Header headerText={'Hello Ali!'} />
+        <Header headerText={'Hello'} />
         <View style={styles.viewStyle}>
           <Button style={styles.button} bordered danger>
             <Text>Logout</Text>

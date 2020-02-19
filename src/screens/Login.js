@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
-import {Image, View, StyleSheet} from 'react-native';
+import {Image, View, StyleSheet, AsyncStorage} from 'react-native';
 import TextBox from '../components/TextBox';
 import ButtonComponent from '../components/ButtonComponent';
 
 class Login extends Component {
   state = {text: ''};
+
+  onButtonPress() {
+    try {
+      AsyncStorage.setItem('name', this.state.text).then(
+        this.props.navigation.navigate('Profile'),
+      );
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   render() {
     return (
@@ -13,12 +23,14 @@ class Login extends Component {
           style={styles.imageStyle}
           source={require('../images/todo.png')}
         />
-        <TextBox inputText={'Name'} value={this.state.text} />
-        <ButtonComponent
-          onPress={() => this.props.navigation.navigate('Profile')}>
-          Login
-        </ButtonComponent>
+        <TextBox
+          inputText="Name"
+          value={this.state.text}
+          onChangeText={text => this.setState({text})}
         />
+        <ButtonComponent
+          label="Login"
+          onPress={this.onButtonPress.bind(this)}></ButtonComponent>
       </View>
     );
   }

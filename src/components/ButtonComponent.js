@@ -2,11 +2,11 @@ import React from 'react';
 import {Button, Text} from 'native-base';
 import {StyleSheet, View} from 'react-native';
 
-const ButtonComponent = ({onPress, children}) => {
+const ButtonComponent = ({onPress, label}) => {
   return (
     <View style={styles.viewStyle}>
       <Button style={styles.button} onPress={onPress}>
-        <Text>{children}</Text>
+        <Text>{label}</Text>
       </Button>
     </View>
   );
