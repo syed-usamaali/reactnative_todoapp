@@ -6,15 +6,15 @@ import ButtonComponent from '../components/ButtonComponent';
 class Login extends Component {
   state = {text: ''};
 
-  onButtonPress() {
+  onButtonPress = async () => {
     try {
-      AsyncStorage.setItem('name', this.state.text).then(
+      await AsyncStorage.setItem('name', this.state.text).then(
         this.props.navigation.navigate('Profile'),
       );
     } catch (error) {
       alert(error);
     }
-  }
+  };
 
   render() {
     return (

@@ -4,15 +4,21 @@ import {StyleSheet, AsyncStorage} from 'react-native';
 import Header from '../components/Header';
 
 class Profile extends Component {
-  componentWillMount() {
-    const value = AsyncStorage.getItem('name');
-    console.log(value);
-  }
+  state = {storedValue: ''};
+
+  componentDidMount = async () => {
+    try {
+      const value = await AsyncStorage.getItem('name');
+      this.setState({storedValue: value});
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   render() {
     return (
       <View>
-        <Header headerText={'Hello'} />
+        <Header headerText={'Hello!' + ' ' + this.state.storedValue} />
         <View style={styles.viewStyle}>
           <Button style={styles.button} bordered danger>
             <Text>Logout</Text>
