@@ -6,6 +6,11 @@ import Header from '../components/Header';
 class Profile extends Component {
   state = {storedValue: ''};
 
+  clearAsyncStorage = async () => {
+    AsyncStorage.clear();
+    this.props.navigation.navigate('Login');
+  };
+
   componentDidMount = async () => {
     try {
       const value = await AsyncStorage.getItem('name');
@@ -17,10 +22,14 @@ class Profile extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.containerStyle}>
         <Header headerText={'Hello!' + ' ' + this.state.storedValue} />
         <View style={styles.viewStyle}>
-          <Button style={styles.button} bordered danger>
+          <Button
+            onPress={this.clearAsyncStorage}
+            style={styles.button}
+            bordered
+            danger>
             <Text>Logout</Text>
           </Button>
         </View>
@@ -39,6 +48,10 @@ const styles = StyleSheet.create({
     height: '80%',
     justifyContent: 'flex-end',
     alignItems: 'stretch',
+  },
+  containerStyle: {
+    height: '100%',
+    backgroundColor: '#ffffff',
   },
 });
 
