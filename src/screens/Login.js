@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Image, View, StyleSheet, AsyncStorage} from 'react-native';
+import {
+  Image,
+  View,
+  StyleSheet,
+  AsyncStorage,
+  ToastAndroid,
+} from 'react-native';
 import TextBox from '../components/TextBox';
 import ButtonComponent from '../components/ButtonComponent';
 
@@ -7,12 +13,16 @@ class Login extends Component {
   state = {text: ''};
 
   onButtonPress = async () => {
-    try {
-      await AsyncStorage.setItem('name', this.state.text).then(
-        this.props.navigation.navigate('Profile'),
-      );
-    } catch (error) {
-      alert(error);
+    if (this.state.text === '') {
+      ToastAndroid.show('Please input your name', ToastAndroid.CENTER);
+    } else {
+      try {
+        await AsyncStorage.setItem('name', this.state.text).then(
+          this.props.navigation.navigate('Profile'),
+        );
+      } catch (error) {
+        alert(error);
+      }
     }
   };
 
